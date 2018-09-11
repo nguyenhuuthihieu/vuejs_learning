@@ -16,7 +16,7 @@
       <p>{{ message }}</p>
       <button v-on:click="reverseMessage">Reverse Message</button>
     </div>
-    <component2/>
+    <component2 v-bind:postTitle="message"/>
   </div>
 </template>
 
@@ -25,7 +25,10 @@
   export default {
     name: 'HelloWorld',
     components: {component2},
-    data () {
+    props: {
+      postTilte:String,
+    },
+      data () {
       return {
         msg: 'Welcome to Your Vue.js App',
         todos: [
