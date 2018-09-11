@@ -16,17 +16,51 @@
       <p>{{ message }}</p>
       <button v-on:click="reverseMessage">Reverse Message</button>
     </div>
+    <br/>
     <component2 v-bind:postTitle="message"/>
+    <br/>
+    <component/>
   </div>
 </template>
 
 <script>
   import component2 from './component2.vue';
+  import component from './component.vue';
   export default {
     name: 'HelloWorld',
-    components: {component2},
+    components: {component2, component},
     props: {
       postTilte:String,
+      // Basic type check (`null` matches any type)
+      propA: Number,
+      // Multiple possible types
+      propB: [String, Number],
+      // Required string
+      propC: {
+        type: String,
+        required: true
+      },
+      // Number with a default value
+      propD: {
+        type: Number,
+        default: 100
+      },
+      // Object with a default value
+      propE: {
+        type: Object,
+        // Object or array defaults must be returned from
+        // a factory function
+        default: function () {
+          return { message: 'hello' }
+        }
+      },
+      // Custom validator function
+      propF: {
+        validator: function (value) {
+          // The value must match one of these strings
+          return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        }
+      }
     },
       data () {
       return {
